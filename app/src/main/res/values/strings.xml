@@ -4,4 +4,6 @@
     <string name="kek_generator">Kek generator</string>
     <string name="select_a_category">Select a category</string>
     <string name="generate_one_more">Generate one more</string>
+    <string name="category">Category</string>
+    <string name="joke_text">%1$s \n %2$s \n %3$s</string>
 </resources>

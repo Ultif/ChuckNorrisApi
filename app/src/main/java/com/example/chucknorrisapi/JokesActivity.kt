@@ -1,5 +1,6 @@
 package com.example.chucknorrisapi
 
+import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +14,18 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Url
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class JokesActivity : AppCompatActivity() {
 
     private var binding : ActivityJokesBinding? = null
     private lateinit var jokeCategory : String
+    private var date = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +43,7 @@ class JokesActivity : AppCompatActivity() {
         }
 
         jokeCategory = intent.extras?.getString(MainActivity.CATEGORY) as String
-        Log.i("cat", jokeCategory.toString())
+        Log.i("cat", jokeCategory)
 
         getJoke()
 
@@ -60,11 +68,17 @@ class JokesActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     val joke: ChuckNorrisResponse = response.body() as ChuckNorrisResponse
 
-                    binding?.tvJoke?.text = joke.value
+//                    val sdt = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
-                    displayChuckImage(joke.icon_url)
+                    val creationDate = LocalDateTime.parse(joke.created_at, DateTimeFormatter.
+                    ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")).toLocalDate()
 
-                    Log.i("Joke", "${joke.value}")
+                    binding?.tvJoke?.text = getString(R.string.joke_text, jokeCategory , joke.value,
+                        creationDate)
+ //                   displayChuckImage(joke.icon_url)
+
+                    Log.i("Joke", joke.value)
+                    Log.i("Date", joke.created_at)
                 }else{
                     when(response.code()){
                         400 -> {
@@ -91,9 +105,9 @@ class JokesActivity : AppCompatActivity() {
         })
     }
 
-    private fun displayChuckImage(url : String){
-        Glide.with(this).load(url).into(binding?.ivIcon as ImageView)
-    }
+//    private fun displayChuckImage(url : String){
+//        Glide.with(this).load(url).into(binding?.ivIcon as ImageView)
+//    }
 
     override fun onDestroy() {
         binding = null

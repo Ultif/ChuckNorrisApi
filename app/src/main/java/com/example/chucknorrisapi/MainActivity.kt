@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.chucknorrisapi.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import retrofit2.Call
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
             if(arr.any { it ==  category}){
                 intent.putExtra(CATEGORY, category)
                 startActivity(intent)
+            }else{
+                Toast.makeText(this, "Choose a category", Toast.LENGTH_LONG).show()
             }
 
         }

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".JokesActivity"
-    android:background="@drawable/bg_bggenerator_com">
+    android:background="@drawable/bg_bggenerator_com"
+    android:layout_gravity="center">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_jokes"
@@ -15,23 +16,14 @@
         android:background="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/CustomActionBarStyle"/>
+        style="@style/CustomActionBarStyle" />
 
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_jokes"
-        app:layout_constraintBottom_toTopOf="@id/mc_text"
-        />
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mc_text"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -39,13 +31,14 @@
         app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_icon"
-        app:layout_constraintBottom_toTopOf="@id/btn_generate_more">
+        app:layout_constraintTop_toBottomOf="@+id/tb_jokes"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/tv_joke"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,12 +50,13 @@
     <Button
         android:id="@+id/btn_generate_more"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="@string/generate_one_more"
         android:textSize="20sp"
+        android:layout_marginTop="400dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mc_text"
+        app:layout_constraintTop_toBottomOf="@id/tb_jokes"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
