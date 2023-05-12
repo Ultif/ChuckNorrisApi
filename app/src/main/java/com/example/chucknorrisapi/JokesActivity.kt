@@ -25,7 +25,7 @@ class JokesActivity : AppCompatActivity() {
 
     private var binding : ActivityJokesBinding? = null
     private lateinit var jokeCategory : String
-    private var date = Calendar.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,14 +68,11 @@ class JokesActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     val joke: ChuckNorrisResponse = response.body() as ChuckNorrisResponse
 
-//                    val sdt = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
-
                     val creationDate = LocalDateTime.parse(joke.created_at, DateTimeFormatter.
                     ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")).toLocalDate()
 
                     binding?.tvJoke?.text = getString(R.string.joke_text, jokeCategory , joke.value,
                         creationDate)
- //                   displayChuckImage(joke.icon_url)
 
                     Log.i("Joke", joke.value)
                     Log.i("Date", joke.created_at)
@@ -105,9 +102,6 @@ class JokesActivity : AppCompatActivity() {
         })
     }
 
-//    private fun displayChuckImage(url : String){
-//        Glide.with(this).load(url).into(binding?.ivIcon as ImageView)
-//    }
 
     override fun onDestroy() {
         binding = null
